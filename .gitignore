@@ -1,0 +1,15 @@
+# Excel data files
+*.xlsx
+
+# Local email dumps
+emails/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# Windows junk
+Thumbs.db
