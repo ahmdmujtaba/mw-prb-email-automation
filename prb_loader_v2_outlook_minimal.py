@@ -12,6 +12,8 @@ PRB_COLUMN = 1  # Column A
 MAILBOX_NAME = "ahmed.mujtaba@jazz.com.pk"
 TARGET_FOLDER = "PRB TT"
 
+SENDER_EMAIL = "tec-noc-analytics@jazz.com.pk"
+
 # -------- REGEX --------
 PRB_REGEX = re.compile(r"(PRB\d{7})", re.IGNORECASE)
 
@@ -40,12 +42,17 @@ messages.Sort("[ReceivedTime]", True)
 for msg in messages:
     try:
         subject = msg.Subject or ""
+        sender = msg.SenderEmailAddress or ""
     except Exception:
+        continue
+
+    # NEW CRITERIA: sender check
+    if sender.lower() != SENDER_EMAIL.lower():
         continue
 
     subject_lower = subject.lower()
 
-    # شرط: must contain BOTH words
+    # must contain BOTH words
     if "high" not in subject_lower or "utilization" not in subject_lower:
         continue
 
